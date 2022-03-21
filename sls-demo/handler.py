@@ -3,10 +3,10 @@ import json
 import boto3
 
 # import debug tool
-import ptvsd
+# import ptvsd
 
-ptvsd.enable_attach(address=("0.0.0.0", 3002), redirect_output=True)
-ptvsd.wait_for_attach()
+# ptvsd.enable_attach(address=("0.0.0.0", 3002), redirect_output=True)
+# ptvsd.wait_for_attach()
 
 
 def lambda_handler(event, context):
