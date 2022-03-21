@@ -1,0 +1,16 @@
+{
+  "name": "sls-demo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {},
+  "scripts": {
+    "start": "./node_modules/.bin/serverless offline -s dev",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "debug": "SET SLS_DEBUG=* && node --inspect %USERPROFILE%\\AppData\\Roaming\\npm\\node_modules\\serverless\\bin\\serverless offline start"
+  },
+  "devDependencies": {
+    "serverless-offline": "^8.5.0"
+  }
+}

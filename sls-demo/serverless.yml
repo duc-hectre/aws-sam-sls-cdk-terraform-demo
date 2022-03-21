@@ -1,0 +1,56 @@
+org: ducdang
+app: sls-demo
+service: sls-demo
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: ap-southeast-1
+  stage: dev
+  memorySize: 128  
+  runtime: python3.8
+  environment:
+    DYNAMODB_TABLE: SlsHelloDbTable
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "arn:aws:dynamodb:ap-southeast-1:983670951732:table/SlsHelloDbTable"
+
+functions:
+  sls-hello:
+    handler: handler.lambda_handler
+    events:
+      - http:
+          path: /hello
+          method: get
+      - http:
+          path: /hello
+          method: post
+resources:
+  Resources:
+    SlsHelloDbTable:
+      Type: 'AWS::DynamoDB::Table'      
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: SlsHelloDbTable
+
+
+
+plugins:
+  - serverless-offline

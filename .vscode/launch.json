@@ -1,25 +1,48 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Serverless",
+      "cwd": "${workspaceFolder}/sls-demo",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "debug"],
+      "outFiles": ["${workspaceFolder}/sls-demo/handler.py"],
+      "port": "3002"
+    },
+    {
+      "type": "python",
+      "request": "attach",
+      "name": "Debug Python Serverless",
+      "port": 3002,
+      "host": "localhost",
+      "pathMappings": [
         {
-            "type": "aws-sam",
-            "request": "direct-invoke",
-            "name": "API sam-demo:HelloWorldFunction",
-            "invokeTarget": {
-                "target": "api",
-                "templatePath": "${workspaceFolder}/sam/template.yaml",
-                "logicalId": "HelloWorldFunction"
-            },
-            "api": {
-                "path": "/hello",
-                "httpMethod": "post",
-                "payload": {
-                    "json": {"name": "Duc"}
-                }
-            }
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "/var/task"
         }
-    ]
+      ]
+    },
+    {
+      "type": "aws-sam",
+      "request": "direct-invoke",
+      "name": "API sam-demo:HelloWorldFunction",
+      "invokeTarget": {
+        "target": "api",
+        "templatePath": "${workspaceFolder}/sam/template.yaml",
+        "logicalId": "HelloWorldFunction"
+      },
+      "api": {
+        "path": "/hello",
+        "httpMethod": "post",
+        "payload": {
+          "json": { "name": "Duc" }
+        }
+      }
+    }
+  ]
 }
